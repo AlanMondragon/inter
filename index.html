@@ -952,7 +952,7 @@
                         const ch = [...t], o = p.querySelector('#txt'); let i = 0; const w = setInterval(() => { o.textContent = ch.slice(0, ++i).join(''); if (i >= ch.length || !o.isConnected) clearInterval(w) }, 35)
                     };
                     const g = p.querySelector('#gift');
-                    if (found.size === 6) { const b = el('<button class="btn" style="background:#ffb703;color:#2b1b52">🎁 Abrir regalo secreto</button>'); b.onclick = () => { at(b, '🎁', 12); g.replaceChildren(el('<div class="card"><h3>Vale por un deseo 🎟️</h3><p>Canjeable por una cita, una llamada larguísima o muchos besos cuando nos veamos. No caduca nunca, vida mía. Mándame captura para cobrarlo.</p></div>')) }; g.append(b) }
+                    if (found.size === 6) { const b = el('<button class="btn" style="background:#ffb703;color:#2b1b52">🎁 Abrir regalo secreto</button>'); b.onclick = () => { at(b, '🎁', 12); g.replaceChildren(el('<div class="card"><h3>Vale por un deseo 🎟️</h3><p>Mi amor este vale sirve para cualquier cosa que quieras. Solo tienes que pedirla y se cumplirá.</p></div>')) }; g.append(b) }
                     else g.append(el(`<p class="soft">Llevas ${found.size} de 6 estrellitas. Regresa a buscarlas para abrir el regalo secreto 🎁</p>`));
                     const r = el('<button class="chip">🔁 Viajar otra vez</button>'); r.onclick = () => go(0); p.append(r)
                 }
