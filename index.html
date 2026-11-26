@@ -110,6 +110,27 @@
             font-weight: 700
         }
 
+        .volume {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font: 600 12px var(--b);
+            white-space: nowrap
+        }
+
+        #volume {
+            width: 58px;
+            min-width: 58px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            flex: 0 0 58px;
+            height: 18px;
+            accent-color: var(--acc)
+        }
+
         #count {
             background: #2b1b52;
             color: #ffe066;
@@ -728,7 +749,7 @@
     </style>
 
     <div id="app">
-        <header><span id="where">💌 Un viaje para ti</span><span class="row" style="flex-wrap:nowrap"><button id="mus"
+        <header><span id="where">💌 Un viaje para ti</span><span class="row" style="flex-wrap:nowrap"><label class="volume" title="Volumen de la música">🔊<input id="volume" type="range" min="1" max="100" step="1" value="5" aria-label="Volumen de la música"><output id="volumeValue">5</output></label><button id="mus"
                     class="chip" hidden></button><span id="count">⭐ 0/6</span></span></header>
         <main id="main"></main>
         <nav id="nav" aria-label="Paradas del viaje"></nav>
@@ -763,13 +784,23 @@
         /* canciones: principal.mp3 acompaña el recorrido; cancion, cancion2 y cancion3 suenan en la radio */
         const audio = f => { const a = new Audio(f); a.preload = 'none'; return a };
         const principal = audio('principal.mp3'), temas = ['cancion.mp3', 'cancion2.mp3', 'cancion3.mp3'].map(audio);
-        principal.loop = true; principal.volume = .6; let quiere = false;
+        const volumeControl = document.querySelector('#volume'), volumeValue = document.querySelector('#volumeValue');
+        let volumeLevel = Number(volumeControl.value) / 100;
+        const setVolume = value => {
+            volumeLevel = Number(value) / 100;
+            [principal, ...temas].forEach(a => a.volume = volumeLevel);
+            volumeValue.value = `${value}%`;
+            volumeControl.setAttribute('aria-valuetext', `${value}%`);
+        };
+        volumeControl.oninput = () => setVolume(volumeControl.value);
+        setVolume(volumeControl.value);
+        principal.loop = true; let quiere = false;
         const btnMus = document.querySelector('#mus');
         const pinta = () => { btnMus.textContent = principal.paused ? '🔇' : '🔊'; btnMus.setAttribute('aria-label', principal.paused ? 'Poner música' : 'Pausar música') };
         principal.onplay = principal.onpause = pinta;
         function suenaPrincipal() { quiere = true; btnMus.hidden = false; pinta(); principal.play().catch(() => { }) }
         btnMus.onclick = () => { if (principal.paused) { stopMusic(); suenaPrincipal(); if (principal.error) toast('La canción principal aún no está agregada 🎵') } else { quiere = false; principal.pause() } };
-        function nota(f, d = .5, v = .12) { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); ac.resume(); const o = ac.createOscillator(), g = ac.createGain(); o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(v, ac.currentTime); g.gain.exponentialRampToValueAtTime(.001, ac.currentTime + d); o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime + d) }
+        function nota(f, d = .5, v = .12) { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); ac.resume(); const o = ac.createOscillator(), g = ac.createGain(); o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(v * volumeLevel, ac.currentTime); g.gain.exponentialRampToValueAtTime(.001, ac.currentTime + d); o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime + d) }
         function stopMusic() { temas.forEach(a => { a.pause(); a.onended = null }); main.classList.remove('playing') }
 
         const P = [
