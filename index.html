@@ -599,9 +599,20 @@
         }
 
         @keyframes beat {
-            to {
-                scale: 1.18;
-                rotate: 6deg
+            0%, 40%, 100% {
+                transform: scale(1)
+            }
+
+            10% {
+                transform: scale(1.2)
+            }
+
+            20% {
+                transform: scale(1.02)
+            }
+
+            30% {
+                transform: scale(1.14)
             }
         }
 
@@ -878,8 +889,8 @@
 
             {
                 id: 'videos', ic: '🎬', n: 'Videos', app: 'Latiditos', theme: ['#17101f', '#fdeefa', '#281c34', '#b9a3c4', '#ff4f9a', '#3b2a49'], say: 'Cargando videitos', build(p) {
-                    p.innerHTML = `<p class="soft center">Desliza hacia arriba dentro del video 👆</p><div class="feed"></div>`;
-                    [['💓', '#ff4f81,#6a1b9a', '💗', 'Cuando aparece un mensaje del amor de mi vida y, aunque nos separen kilómetros, siento que está aquí conmigo. Te amo con todo mi corazón, mi cielito.', ['Ese mensajito tuyo me alegra hasta el día más largo 💌', 'Tu sonrisa es mi lugar favorito, amor de mi vida']], ['🐱', '#ff9f43,#c0392b', '🐾', 'Yo buscando cualquier excusa para hablar con mi amor de mi vida, aunque ya nos hayamos mandado mil mensajes hoy. Nunca me canso de ti; te amo infinito.', ['Atención para mi persona favorita, por favor 🥺', 'Te mando besitos hasta que pueda dártelos en persona 😽']], ['🌍✈️', '#1e6fd9,#14213d', '☁️', 'Mi corazón ya hizo las maletas: va rumbo a donde estás tú. Cuento los días para abrazarte, mi amor de mi vida. Te amo más que a todos los kilómetros que nos separan.', ['Cada día falta menos para ese abrazote 🥹', 'Voy guardando todos los besos para cuando nos veamos 💕']], ['💍', '#2b1055,#d53a9d', '✨', 'Mi sueño favorito es nuestro futuro: despertar cerquita, compartirlo todo y seguir eligiéndote cada día. Eres el amor de mi vida y te amo con toda mi alma.', ['Aprobado: ustedes dos juntitos para siempre 💍', 'Qué empalagoso… y aun así quiero más 😭💗']]].forEach(([h, g, f, t, cm], k) => {
+                    p.innerHTML = `<p class="soft center">Pequeños latidos que me recuerdan a ti 💓 · desliza hacia arriba 👆</p><div class="feed"></div>`;
+                    [['💓', '#ff4f81,#6a1b9a', '💗', 'Cada vez que aparece tu nombre en mi pantalla, mi corazón da un saltito. Aunque nos separen kilómetros, mi latido favorito siempre eres tú.', ['Tu nombre debería venir con aviso para mi corazón 💓', 'Y eso que solo llegó un “hola” tuyo 🥹']], ['💞', '#ff9f43,#c0392b', '💕', 'Cada mensaje tuyo le cambia el ritmo a mi día: dos latiditos felices y una sonrisa que no se me quita. 💓', ['Diagnóstico: demasiados latiditos por ese mensaje 💗', 'Receta: otro mensajito tuyo, por favor 💌']], ['💗', '#1e6fd9,#14213d', '💓', 'A veces nos separa el mapa, pero no el ritmo: pienso en ti y siento que mis latidos ya van camino a tu abrazo.', ['El mapa dice lejos; mis latidos dicen “voy contigo” 💞', 'Cada día un latido menos para ese abrazo 🥹']], ['❤️‍🔥', '#2b1055,#d53a9d', '💖', 'Mi lugar favorito todavía es un sueño: despertar a tu lado y empezar cada día con el mismo latido, juntitos.', ['Ese futuro juntitos ya tiene mi corazón reservado 🫶', 'Un latido, una promesa: seguir eligiéndote 💍']]].forEach(([h, g, f, t, cm], k) => {
                         const key = ['sofa', 'guino', 'frente', 'abrazosol'][k], bg = F[key];
                         const v = el(`<section class="vid" style="background:linear-gradient(#0000 45%,#000c),url(${bg}) center/cover"><div class="hero">${h}</div><div class="side"><button aria-label="Me gusta">🤍<small>${k + 8}.${k}M</small></button><button aria-label="Comentarios">💬<small>${cm.length}</small></button><button aria-label="Mandar beso">😘<small>beso</small></button></div><div class="cap"><div class="c" hidden></div><b>@tu_enamorado</b><p>${t}</p></div></section>`);
                         for (let i = 0; i < 9; i++) { const s = el(`<span class="fall">${f}</span>`); s.style.left = i * 11 + '%'; s.style.animationDuration = 3 + Math.random() * 4 + 's'; s.style.animationDelay = -Math.random() * 6 + 's'; v.prepend(s) }
