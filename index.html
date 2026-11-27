@@ -948,7 +948,7 @@
                     no.onpointerenter = esc; no.onclick = esc;
                     si.onclick = () => {
                         no.hidden = true; si.hidden = true; for (let i = 0; i < 14; i++)setTimeout(() => burst(Math.random() * innerWidth, innerHeight * (.25 + Math.random() * .6), pick(['💖', '🎆', '✨', '💕']), 9), i * 180);
-                        p.querySelector('#carta').hidden = false; const t = 'Mi amor: gracias por acompañarme en este viaje. Hay kilómetros en el mapa, pero ninguno logra sacarte de mis pensamientos. Eres mi cielito cuando todo está gris, mi estrellita cuando es de noche y mi vida todos los días. Te quiero con cada pedacito de mí, y sueño con el día en que este abrazo no necesite pantalla. Siempre tuyo. 💌';
+                        p.querySelector('#carta').hidden = false; const t = 'Mi amor: gracias por acompañarme en este viaje. Hay kilómetros en el mapa, pero ninguno logra sacarte de mis pensamientos. Eres mi cielito cuando todo está gris, mi estrellita cuando es de noche y mi vida todos los días. Te amo con cada pedacito de mí, y sueño con el día en que este abrazo no necesite pantalla. Siempre tuyo. 💌';
                         const ch = [...t], o = p.querySelector('#txt'); let i = 0; const w = setInterval(() => { o.textContent = ch.slice(0, ++i).join(''); if (i >= ch.length || !o.isConnected) clearInterval(w) }, 35)
                     };
                     const g = p.querySelector('#gift');
